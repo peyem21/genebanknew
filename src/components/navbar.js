@@ -1,43 +1,71 @@
-// import { useHistory } from "react-router";
+//import { useHistory } from "react-router";
+import { useState } from 'react';
+import { FaBars, FaTimes } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 const Navbar = () => {
-// const history = useHistory();
+  const [showNavbar, setShowNavbar] = useState(false);
+
+  const handleShowNavbar = () => {
+    setShowNavbar(!showNavbar);
+  };
+  
 
 return ( <>
-  <nav>
+  <nav className="navbar">
     <div className="my-col-10 off-1">
       <div className="my-col-2">
         <div className="my-col-10 off-1">
-          <span className="px13 bold">Genebank</span>
+          <span className="logo px13 bold">Genebank</span>
         </div>
       </div>
       <div className="my-col-7 centered bold px13">
-       <span className="logo"></span>
-       <span className="links">Home</span>
-       <span className="links">User guides</span>
-       <span className="links">Analysis </span>
-        <div className="extension">
-        <span className="links">About
-        <i className="fas fa-angle-down mg-3"></i> 
-        <div className="nav-extentions">
-          <div className="my-col-10 off-1 down-5">
-            <div className="ex-links">Our Publications</div>
-            <div className="ex-links">How To Cite Us</div>
-            <div className="ex-links">Papers That Cite Us</div>
-            <div className="ex-links">Our Team</div>
-          </div>
+        <div className="menu-icon" onClick={handleShowNavbar}>
+          {showNavbar ? <FaTimes /> : <FaBars />} {/* Toggle between FaBars and FaTimes based on showNavbar */}
         </div>
-        </span>
+        <div className={`nav-elements ${showNavbar && 'active'}`}>
+
+          <Link to='/'>
+           <span className="links">Home</span>
+          </Link>
+          <Link to='/userguide'>
+           <span className="links">Userguides</span>
+          </Link>
+          <Link to='/research'>
+           <span className="links">Research </span>
+          </Link>
+          <span className="links">Publication
+            <div className="extension">
+            <i className="fas fa-angle-down mg-3"></i> 
+            <div className="nav-extentions">
+              <div className="my-col-10 off-1 down-5">
+                <div className="ex-links">Journals</div>
+                <div className="ex-links">Conference & Events</div>
+            </div>
+            </div>
+            </div>  
+          </span>
+          <span className="links">About
+           <div className="extension">
+           <i className="fas fa-angle-down mg-3"></i>
+           <div className="nav-extentions">
+            <div className="my-col-10 off-1 down-5">
+              <Link to='/who-we-are'>
+               <div className="ex-links">Who We Are</div>
+              </Link>
+              <Link to='/our-team'>
+               <div className="ex-links">Our Team</div>
+              </Link>
+            </div>
+           </div>
+           </div>
+          </span>
         </div>
       </div>
-      <div className="my-col-3 last-child px13 right ">
-       <div className="my-col-12 off-2" >
-       {/* <span className="links white bg-color-code-1">Sign Up</span> */}
-       <span  className="links white  mg-3 bg-color-code-1">Upload Data</span>
-       </div>
-      </div>
+          
     </div>
   </nav> 
- </> );
+ </> 
+ );
 }
  
 export default Navbar;
